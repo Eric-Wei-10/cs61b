@@ -1,5 +1,5 @@
 /**
- *  Tests Nbody.readPlanets. Reads in ./data/planets.txt and checks output of
+ *  Tests NPlanet.readPlanets. Reads in ./data/planets.txt and checks output of
  *  readPlanets().
  */
 public class TestReadPlanets {
