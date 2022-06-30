@@ -42,8 +42,8 @@ public class ArrayDeque<T> {
         if (size != 0 && front == rear) {
             resize(2*items.length);
         }
-        items[(front - 1) % items.length] = item;
-        front = (front - 1) % items.length;
+        items[(front - 1 + items.length) % items.length] = item;
+        front = (front - 1 + items.length) % items.length;
         size = size + 1;
     }
 
@@ -54,8 +54,8 @@ public class ArrayDeque<T> {
         if (items.length >= 16 && (((double) (size - 1)) / items.length <= 0.25)) {
             resize(items.length/2);
         }
-        T res = items[(rear - 1) % items.length];
-        rear = (rear - 1) % items.length;
+        T res = items[(rear - 1 + items.length) % items.length];
+        rear = (rear - 1 + items.length) % items.length;
         size = size - 1;
         return res;
     }
