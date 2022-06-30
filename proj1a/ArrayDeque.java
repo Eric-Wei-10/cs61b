@@ -17,7 +17,7 @@ public class ArrayDeque<T> {
         if (rear > front) {
             System.arraycopy(items, front, p, 0, size);
             front = 0;
-            rear = size - 1;
+            rear = size;
         } else {
             System.arraycopy(items, 0, p, 0, rear);
             int length = items.length - front;
