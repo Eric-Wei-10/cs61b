@@ -1,8 +1,8 @@
 public class LinkedListDeque<T> {
     private class Node {
-        public Node prev;
-        public T item;
-        public Node next;
+        private Node prev;
+        private T item;
+        private Node next;
 
         public Node(Node p, Node n) {
             prev = p;
@@ -32,7 +32,7 @@ public class LinkedListDeque<T> {
         sentinel.prev = sentinel;
         sentinel.next = sentinel;
         for (int i = 0; i < other.size; i++) {
-            this.addLast((T)other.get(i));
+            this.addLast((T) other.get(i));
         }
     }
 
