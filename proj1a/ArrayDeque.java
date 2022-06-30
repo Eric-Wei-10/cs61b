@@ -15,7 +15,9 @@ public class ArrayDeque<T> {
     private void resize(int newSize) {
         T[] p = (T[]) new Object[newSize];
         if (rear > front) {
-            System.arraycopy(items, front, p, front, size);
+            System.arraycopy(items, front, p, 0, size);
+            front = 0;
+            rear = size - 1;
         } else {
             System.arraycopy(items, 0, p, 0, rear);
             int length = items.length - front;
