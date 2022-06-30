@@ -1,9 +1,9 @@
 public class ArrayDeque<T> {
     /** Treat the array as a circular array */
-    int size;
-    T[] items;
-    int front;
-    int rear;
+    private int size;
+    private T[] items;
+    private int front;
+    private int rear;
 
     public ArrayDeque() {
         size = 0;
@@ -16,10 +16,10 @@ public class ArrayDeque<T> {
         T[] p = (T[]) new Object[newSize];
         if (rear > front) {
             System.arraycopy(items, front, p, front, size);
-        }
-        else{
+        } else {
             System.arraycopy(items, 0, p, 0, rear);
-            System.arraycopy(items, front, p, p.length - items.length + front, items.length - front);
+            int length = items.length - front;
+            System.arraycopy(items, front, p, p.length - length, length);
             front = p.length - items.length + front;
         }
         items = p;
