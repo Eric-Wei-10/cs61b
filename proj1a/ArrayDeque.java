@@ -12,26 +12,23 @@ public class ArrayDeque<T> {
         rear = 0;
     }
 
-    public ArrayDeque(ArrayDeque other) {
-        size = other.size;
-        front = other.front;
-        rear = other.rear;
-        items = (T[]) new Object[other.items.length];
-        System.arraycopy(other.items, 0, items, 0, other.items.length);
-    }
-
     private void resize(int newSize) {
         T[] p = (T[]) new Object[newSize];
-        System.arraycopy(items, 0, p, 0, rear);
-        System.arraycopy(items, front, p, p.length-items.length+front, items.length-front);
-        front = p.length-items.length+front;
+        if (rear > front) {
+            System.arraycopy(items, front, p, front, size);
+        }
+        else{
+            System.arraycopy(items, 0, p, 0, rear);
+            System.arraycopy(items, front, p, p.length - items.length + front, items.length - front);
+            front = p.length - items.length + front;
+        }
         items = p;
     }
 
     public void addLast(T item) {
         /** This means the array is full */
         if (size != 0 && front == rear) {
-            resize(2*items.length);
+            resize(2 * items.length);
         }
         items[rear] = item;
         rear = (rear + 1) % items.length;
@@ -40,7 +37,7 @@ public class ArrayDeque<T> {
 
     public void addFirst(T item) {
         if (size != 0 && front == rear) {
-            resize(2*items.length);
+            resize(2 * items.length);
         }
         items[(front - 1 + items.length) % items.length] = item;
         front = (front - 1 + items.length) % items.length;
@@ -52,7 +49,7 @@ public class ArrayDeque<T> {
             return null;
         }
         if (items.length >= 16 && (((double) (size - 1)) / items.length <= 0.25)) {
-            resize(items.length/2);
+            resize(items.length / 2);
         }
         T res = items[(rear - 1 + items.length) % items.length];
         rear = (rear - 1 + items.length) % items.length;
@@ -65,7 +62,7 @@ public class ArrayDeque<T> {
             return null;
         }
         if (items.length >= 16 && (((double) (size - 1)) / items.length <= 0.25)) {
-            resize(items.length/2);
+            resize(items.length / 2);
         }
         T res = items[front];
         front = (front + 1) % items.length;
@@ -86,5 +83,12 @@ public class ArrayDeque<T> {
             return null;
         }
         return items[(front + index) % items.length];
+    }
+
+    public void printDeque() {
+        for (int i = front; i < rear; i = (i + 1) % items.length) {
+            System.out.print(items[i] + " ");
+        }
+        System.out.println();
     }
 }
