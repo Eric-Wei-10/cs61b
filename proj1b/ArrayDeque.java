@@ -1,0 +1,99 @@
+public class ArrayDeque<Item> implements Deque<Item> {
+    /** Treat the array as a circular array */
+    private int size;
+    private Item[] items;
+    private int front;
+    private int rear;
+
+    public ArrayDeque() {
+        size = 0;
+        items = (Item[]) new Object[8];
+        front = 0;
+        rear = 0;
+    }
+
+    private void resize(int newSize) {
+        Item[] p = (Item[]) new Object[newSize];
+        if (rear > front) {
+            System.arraycopy(items, front, p, 0, size);
+            front = 0;
+            rear = size;
+        } else {
+            System.arraycopy(items, 0, p, 0, rear);
+            int length = items.length - front;
+            System.arraycopy(items, front, p, p.length - length, length);
+            front = p.length - items.length + front;
+        }
+        items = p;
+    }
+
+    @Override
+    public void addLast(Item item) {
+        /** This means the array is full */
+        if (size != 0 && front == rear) {
+            resize(2 * items.length);
+        }
+        items[rear] = item;
+        rear = (rear + 1) % items.length;
+        size = size + 1;
+    }
+
+    @Override
+    public void addFirst(Item item) {
+        if (size != 0 && front == rear) {
+            resize(2 * items.length);
+        }
+        items[(front - 1 + items.length) % items.length] = item;
+        front = (front - 1 + items.length) % items.length;
+        size = size + 1;
+    }
+
+    @Override
+    public Item removeLast() {
+        if (isEmpty()) {
+            return null;
+        }
+        if (items.length >= 16 && (((double) (size - 1)) / items.length <= 0.25)) {
+            resize(items.length / 2);
+        }
+        Item res = items[(rear - 1 + items.length) % items.length];
+        rear = (rear - 1 + items.length) % items.length;
+        size = size - 1;
+        return res;
+    }
+
+    @Override
+    public Item removeFirst() {
+        if (isEmpty()) {
+            return null;
+        }
+        if (items.length >= 16 && (((double) (size - 1)) / items.length <= 0.25)) {
+            resize(items.length / 2);
+        }
+        Item res = items[front];
+        front = (front + 1) % items.length;
+        size = size - 1;
+        return res;
+    }
+
+    @Override
+    public int size() {
+        return size;
+    }
+
+    @Override
+    public Item get(int index) {
+        if (index >= size) {
+            return null;
+        }
+        return items[(front + index) % items.length];
+    }
+
+    @Override
+    public void printDeque() {
+        for (int i = front; i < rear; i = (i + 1) % items.length) {
+            System.out.print(items[i] + " ");
+        }
+        System.out.println();
+    }
+}

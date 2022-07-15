@@ -122,16 +122,6 @@ public class IntList {
             }
         }
         return res;
-        /**
-         * Using recursive
-         * if(A == null){
-         *     return B;
-         * }
-         * if(A.rest == null){
-         *     return new IntList(A.first, B);
-         * }
-         * return new IntList(A.first, catenate(A.rest, B));
-         */
     }
 
 
