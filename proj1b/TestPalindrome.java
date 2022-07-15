@@ -29,6 +29,10 @@ public class TestPalindrome {
         String word3 = "";
         boolean res3 = palindrome.isPalindrome(word3);
         assertTrue(res3);
+
+        String word4 = "a";
+        boolean res4 = palindrome.isPalindrome(word4);
+        assertTrue(res4);
     }
 
     @Test
