@@ -32,7 +32,7 @@ public class TestPalindrome {
     }
 
     @Test
-    public void TestOverloadedIsPalindrome() {
+    public void testOverloadedIsPalindrome() {
         CharacterComparator cc = new OffByOne();
         String word = "flake";
         boolean res = palindrome.isPalindrome(word, cc);

@@ -8,7 +8,7 @@ public class Palindrome {
     }
 
     /* Helper function of isPalindrome */
-    public boolean isPalindrome(String word, int index) {
+    private boolean isPalindrome(String word, int index) {
         if (index == word.length() / 2) {
             return true;
         }
@@ -24,7 +24,7 @@ public class Palindrome {
     }
 
     /* Helper function of overloaded isPalindrome */
-    public boolean isPalindrome(String word, CharacterComparator cc, int index) {
+    private boolean isPalindrome(String word, CharacterComparator cc, int index) {
         if (index == word.length() / 2) {
             return true;
         }
